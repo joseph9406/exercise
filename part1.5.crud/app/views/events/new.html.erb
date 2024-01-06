@@ -1,0 +1,5 @@
+<%= form_for @event, :url => { controller: :events, action: :create } do |f| %>
+  <%= render :partial => "form", :locals => {:f => f} %>
+
+  <%= f.submit "新增" %>
+<% end %>

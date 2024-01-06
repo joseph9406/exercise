@@ -1,0 +1,37 @@
+<!-- 這個文件的根節點是"document", "root"並不是根節點,而是根節點底下的一個普通節點。-->
+<root>
+  <sitcoms id="A01" >
+    <sitcom id="AA01">
+      <name>Married with Children</name>
+      <characters>
+        <character>Al Bundy</character>
+        <character>Bud Bundy</character>
+        <character>Marcy Darcy</character>
+      </characters>
+    </sitcom>
+    <sitcom id="AA02" title='第二個sitcom節點'>
+      <name>Perfect Strangers</name>
+      <characters>
+        <character>Larry Appleton</character>
+        <character>Balki Bartokomous</character>
+      </characters>
+    </sitcom>
+    <sitcom id="AA03">
+      <character>AAAAA</character>
+      <character>BBBBB</character>
+      <character>CCCCC</character>
+      <character>DDDDD</character>
+    </sitcom>
+  </sitcoms>
+  <dramas>
+    <drama>
+      <name>The A-Team</name>
+      <characters>
+        <character>John "Hannibal" Smith</character>
+        <character>Templeton "Face" Peck</character>
+        <character>"B.A." Baracus</character>
+        <character>"Howling Mad" Murdock</character>
+      </characters>
+    </drama>
+  </dramas>
+</root>

@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+-<oval_definitions xsi:schemaLocation="http://oval.mitre.org/XMLSchema/oval-definitions-5 oval-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#windows windows-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-definitions-5#independent independent-definitions-schema.xsd http://oval.mitre.org/XMLSchema/oval-common-5 oval-common-schema.xsd" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:oval="http://oval.mitre.org/XMLSchema/oval-common-5" xmlns:oval-def="http://oval.mitre.org/XMLSchema/oval-definitions-5">
+
+<generator>
+  <oval:product_name>The OVAL Repository</oval:product_name>
+  <oval:schema_version>5.10.1</oval:schema_version>
+  <oval:timestamp>2015-07-24T02:18:25.200-04:00</oval:timestamp>
+</generator>
+
+<definitions>  <!-- definition 用於描写叙述如何对某一特定安全问题进行检查。 -->  
+  <!-- 漏洞（Vulnerability）：描写叙述怎样依据系统状态判定系统中是否存在某个特定漏洞。 -->
+  <!-- 补丁（Patch）：关注於怎样判定系统中是否安装了某个特定补丁。 -->
+  <!-- 软件（Inventory）：描写叙述怎样对系统中是否安装了某个特定的软件进行判定。 -->
+  <!-- 合规（Compliance）：描写叙述怎样对系统是否满足某个特定的配置要求进行判定。-->
+  <definition xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5" class="inventory" version="3" id="oval:org.mitre.oval:def:28779">
+    <metadata> 
+      <title>Microsoft Windows 10 Insider Preview is installed</title>
+      <affected family="windows">  <!-- 会受到影响的操作系统或应用程序名称及版本号 -->
+        <platform>Microsoft Windows 10 Insider Preview</platform>  
+      </affected>
+      <reference ref_id="microsoft_windows_10_insider_preview" source="ICM"/>  <!-- 此Definition与其他检查单或文档的映射关系 -->
+      <description>  <!-- Definition的描写叙述 -->
+        The operating system installed on the system is Microsoft Windows 10 Insider Preview.
+      </description>
+      <oval_repository>
+        <dates>
+          <submitted date="2015-05-07T08:31:03">  <!-- 表示 OVAL 定义的提交日期。-->
+            <contributor organization="ALTX-SOFT">Maria Mikhno</contributor>  <!-- 指定該"OVAL 定义"的贡献者信息。此例中，贡献者是来自组织 "ALTX-SOFT" 的 Maria Mikhno。-->
+          </submitted>
+          <status_change date="2015-05-12T14:33:42.950-04:00">DRAFT</status_change>  <!--表示 OVAL 定义的状态变为 "DRAFT"（草稿）的時間。-->
+          <status_change date="2015-06-01T04:00:20.683-04:00">INTERIM</status_change>  <!--表示 OVAL 定义的状态变为 "INTERIM"（临时）的時間。-->
+          <status_change date="2015-06-22T04:00:44.312-04:00">ACCEPTED</status_change>  <!--表示 OVAL 定义的状态变为 "ACCEPTED"（接受）的時間。-->
+        </dates>
+        <status>ACCEPTED</status>
+      </oval_repository>
+    </metadata>
+
+    <!-- 如果 <criteria> 標簽中没有指定 operator 属性，那么默认情况下，这些条件会被视为使用 AND 运算符（逻辑与）连接。-->
+    <!-- 所以, 所有的 ceriterion 都要為真，整個　＜criteria> 才會為真 -->    
+    <criteria>  
+      <!-- test_ref 指定此Definition所使用的Test, comment 寫給人看的,用于描写叙述出上述Test的检測行为 -->
+      <criterion test_ref="oval:org.mitre.oval:tst:99" comment="the installed operating system is part of the Microsoft Windows family"/>
+      <criterion test_ref="oval:org.mitre.oval:tst:138532" comment="Check if Microsoft Windows 10 Insider Preview is installed"/>
+    </criteria>
+  </definition>
+</definitions>
+
+
+<tests>
+  <!-- xxx_test 通过不同的节点名字表达不同的測试类型，如文件、注冊表、策略等, 例如, family_test、registry_test、passwordpolicy_test ...  -->
+  <family_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" version="1" id="oval:org.mitre.oval:tst:99" comment="the installed operating system is part of the Microsoft Windows family" check="only one" check_existence="at_least_one_exists">
+    <object object_ref="oval:org.mitre.oval:obj:99"/>  <!-- 此Test使用的Object的id -->
+    <state state_ref="oval:org.mitre.oval:ste:99"/>    <!-- 此Test使用的State的id -->
+  </family_test>
+  <registry_test xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" version="1" id="oval:org.mitre.oval:tst:138532" comment="Check if Microsoft Windows 10 Insider Preview is installed" check="all" check_existence="at_least_one_exists">
+    <object object_ref="oval:org.mitre.oval:obj:5590"/>
+    <state state_ref="oval:org.mitre.oval:ste:38384"/>
+  </registry_test>
+</tests>
+
+<objects>
+  <family_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" version="1" id="oval:org.mitre.oval:obj:99" comment="This is the default family object. Only one family object should exist."/>
+  <registry_object xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" version="1" id="oval:org.mitre.oval:obj:5590" comment="This registry key identifies the Windows ProductName">
+    <hive datatype="string">HKEY_LOCAL_MACHINE</hive>
+    <key datatype="string">SOFTWARE\Microsoft\Windows NT\CurrentVersion</key>
+    <name datatype="string">ProductName</name>
+  </registry_object>
+</objects>
+
+<states>
+  <family_state id="oval:org.mitre.oval:ste:99" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#independent" version="2" comment="Microsoft Windows family">
+    <family operation="case insensitive equals">windows</family>
+  </family_state>
+  <registry_state id="oval:org.mitre.oval:ste:38384" xmlns="http://oval.mitre.org/XMLSchema/oval-definitions-5#windows" version="1" comment="The registry key matches with Windows 10 Insider Preview">
+    <value operation="pattern match">^.*Windows.*10.*Insider.*Preview.*$</value>
+  </registry_state>
+  <passwordpolicy_state id="oval:gov.nist.usgcb.winseven:ste:33" version="2">
+    <min_passwd_len operation="greater than or equal" datatype="int" var_ref="oval:gov.nist.usgcb.winseven:var:22"/>
+  </passwordpolicy_state>
+</states>
+
+</oval_definitions>
