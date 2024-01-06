@@ -2,7 +2,7 @@
 module Logtest
   module Log
     def logger        
-      puts "**** 執行 logger 方法 ****"
+      puts "**** 執行 logger 方法... ****"
       @@instance ||= Logtest::LoggerFactory.logger  # @@instance 是類變量,同一個類所產生的多個實例,只會共用同一個@@instance
     end
   end
